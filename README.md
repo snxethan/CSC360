@@ -38,7 +38,7 @@ _No external libraries beyond .NET are required unless otherwise specified in a 
 -----------------------------------
 
 
-Ethan Townsend
-Neumont College of Computer Science
+Ethan Townsend |
+Neumont College of Computer Science |
 etownsend@student.neumont.edu
 
