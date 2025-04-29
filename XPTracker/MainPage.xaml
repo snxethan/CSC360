@@ -1,0 +1,70 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XPTracker.ViewModels"
+             x:Class="XPTracker.MainPage"
+             Title="">
+
+    <ContentPage.BindingContext>
+        <vm:XPTrackerViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.MenuBarItems>
+        <!-- Menu Bar -->
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="New" Command="{Binding NewCommand}" />
+            <MenuFlyoutItem Text="Open" Command="{Binding LoadCommand}" />
+            <MenuFlyoutItem Text="Save" Command="{Binding SaveCommand}" />
+            <MenuFlyoutItem Text="Save As" Command="{Binding SaveAsCommand}" />
+            <MenuFlyoutItem Text="Close" Clicked="OnCloseClicked" />
+        </MenuBarItem>
+
+        <!-- Add Player -->
+        <MenuBarItem Text="Players">
+            <MenuFlyoutItem Text="Add New Player" Command="{Binding AddPlayerCommand}" />
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+    <Grid RowDefinitions="Auto, *" Padding="10">
+
+        <!-- Header -->
+        <Label Text="PLAYERS:"
+               FontSize="32"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Grid.Row="0" />
+
+        <!-- Player List -->
+        <CollectionView ItemsSource="{Binding Players}" x:Name="PlayersList"
+                        VerticalOptions="FillAndExpand"
+                        Grid.Row="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10">
+                        <VerticalStackLayout>
+                            <Entry Text="{Binding Name}" />
+                            <Label Text="{Binding XP, StringFormat='XP: {0}'}" />
+
+                            <!-- Player XP buttons -->
+                            <HorizontalStackLayout>
+                                <Button Text="+25 XP" Clicked="On25XPClicked" BackgroundColor="Aquamarine" />
+                                <Button Text="+50 XP" Clicked="On50XPClicked" BackgroundColor="Aquamarine"/>
+                                <Button Text="+100 XP" Clicked="On100XPClicked" BackgroundColor="Aquamarine"/>
+                                <Button Text="+500 XP" Clicked="On500XPClicked" BackgroundColor="Aquamarine"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Custom XP Entry -->
+                            <Entry Placeholder="Enter XP (Click Enter)" Keyboard="Numeric"
+                                   Completed="OnCustomXPEntered"/>
+
+                            <!-- Remove Playeer-->
+                            <Button Text="Remove Player" 
+                                    Command="{Binding Path=BindingContext.RemovePlayerCommand, Source={x:Reference PlayersList}}" 
+                                    CommandParameter="{Binding}" BackgroundColor="Red"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>
