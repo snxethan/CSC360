@@ -8,10 +8,10 @@ Each branch may represent different labs, exercises, or feature expansions relat
 
 **Option 1: Open in Visual Studio 2022**
 1. Clone the repository:
-  1. bash
-  2. Copy
-  3. Edit
-  4. git clone https://github.com/yourusername/CSC360-XPTracker.git
+    1. bash
+    2. Copy
+    3. Edit
+    4. git clone https://github.com/yourusername/CSC360-XPTracker.git
 2. Open the solution file XPTracker.sln in Visual Studio 2022.
 
 _Build and run the project using F5 or the "Start Debugging" button._
