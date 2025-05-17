@@ -2,13 +2,17 @@
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
+using XPTracker.States;
 
 namespace XPTracker.ViewModels
 {
+
     public class XPTrackerViewModel : BindableObject
     {
         private int _playerCount = 1;
         private string _currentFilePath;
+        private IPlayerXPState _xpState = new NormalXPState();
+
 
         public ObservableCollection<Player> Players
         {
@@ -21,8 +25,19 @@ namespace XPTracker.ViewModels
         }
         private ObservableCollection<Player> _players = new();
 
+        public IPlayerXPState XPState
+        {
+            get => _xpState;
+            set
+            {
+                _xpState = value;
+                OnPropertyChanged(nameof(XPState));
+            }
+        }
+
+
         // interface commands 
-        public ICommand AddPlayerCommand { get; }s
+        public ICommand AddPlayerCommand { get; }
         public ICommand RemovePlayerCommand { get; }
         public ICommand RenamePlayerCommand { get; }
         public ICommand ModifyXPCommand { get; }
@@ -30,6 +45,9 @@ namespace XPTracker.ViewModels
         public ICommand SaveAsCommand { get; }
         public ICommand LoadCommand { get; }
         public ICommand NewCommand { get; }
+        public ICommand SetXPModeCommand { get; }
+
+
 
         public XPTrackerViewModel()
         {
@@ -41,6 +59,18 @@ namespace XPTracker.ViewModels
             SaveAsCommand = new Command(async () => await SavePlayersAs());
             LoadCommand = new Command(async () => await LoadPlayers());
             NewCommand = new Command(NewButton);
+            SetXPModeCommand = new Command<string>(SetXPMode);
+        }
+
+        private void SetXPMode(string mode)
+        {
+            XPState = mode switch
+            {
+                "Normal" => new NormalXPState(),
+                "Double" => new DoubleXPState(),
+                "Locked" => new LockedXPState(),
+                _ => new NormalXPState()
+            };
         }
 
         // clears the list, resets count, resets path
@@ -71,8 +101,9 @@ namespace XPTracker.ViewModels
         private void ModifyXP((Player player, int amount) data)
         {
             if (data.player != null)
-                data.player.XP += data.amount;
+                XPState.ModifyXP(data.player, data.amount);
         }
+
 
 
         // save players to file
@@ -130,6 +161,7 @@ namespace XPTracker.ViewModels
             }
         }
 
+
         // load players from file
         private async Task LoadPlayers()
         {
@@ -170,6 +202,8 @@ namespace XPTracker.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", $"Failed to load file: {ex.Message}", "OK");
             }
         }
+
+
 
     }
 }
