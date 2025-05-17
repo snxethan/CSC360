@@ -18,7 +18,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("XPTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+6167bde765d5f508e7e2670d135b614eb94440bd")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+12771b31a4df7b70faad42ccdafa5e6a55ba3a93")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("XPTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("XPTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
