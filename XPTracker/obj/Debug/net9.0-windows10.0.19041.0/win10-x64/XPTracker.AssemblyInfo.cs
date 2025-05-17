@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("XPTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+49ab0286cb25abbc9012ec3e12bc1e21642fc9b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("XPTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("XPTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
